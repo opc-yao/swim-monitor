@@ -3,7 +3,7 @@ from email.mime.text import MIMEText
 from playwright.sync_api import sync_playwright
 
 # ===== SWIM =====
-SWIM_URL = "https://top.swim.mlit.go.jp/swim"
+SWIM_URL = "https://top.swim.mlit.go.jp/swim/login"
 LOGIN_ID = "yao-opc@aerotoyota.co.jp"
 LOGIN_PW = "@1234Dispatch"
 
