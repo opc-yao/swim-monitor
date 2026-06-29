@@ -53,7 +53,7 @@ frame.locator("button").click()
 
 # ログイン後待機
 page.wait_for_timeout(10000)
-``
+
         page.click("text=利用サービス一覧")
         page.click("text=フライトプラン登録サービス")
         page.click("text=通報一覧")
