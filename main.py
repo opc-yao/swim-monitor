@@ -36,19 +36,22 @@ def run():
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
+        
         page.goto(SWIM_URL)
-        page.wait_for_timeout(10000)
-        frame = page.frame_locator("iframe")
-        frame.locator("input").first.fill(LOGIN_ID)
-        frame.locator("input[type='password']").fill(LOGIN_PW)
-        frame.locator("button").click()
+# ✅ 十分待つ
+        page.wait_for_timeout(15000)
+# ✅ 全入力欄を取得
+        inputs = page.locator("input")
+# ✅ 数確認（デバッグ）
+        print("input数:", inputs.count())
+# ✅ 上から順に試す（強引だけど確実）
+        inputs.nth(0).fill(LOGIN_ID)
+        inputs.nth(1).fill(LOGIN_PW)
+# ✅ ボタン押す
+        page.locator("button").first.click()
+# ✅ 遷移待ち
         page.wait_for_timeout(10000)
 
-        page.click("text=利用サービス一覧")
-        page.click("text=フライトプラン登録サービス")
-        page.click("text=通報一覧")
-
-        page.wait_for_timeout(5000)
 
         content = page.content()
 
