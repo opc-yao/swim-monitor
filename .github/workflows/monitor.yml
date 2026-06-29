@@ -2,8 +2,8 @@ name: SWIM Monitor
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # 5分ごと
-  workflow_dispatch:       # 手動実行もできる
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
 
 jobs:
   run:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: コード取得
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Pythonセット
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
@@ -24,5 +24,5 @@ jobs:
       - name: ブラウザインストール
         run: playwright install
 
-      - name: プログラム実行
+      - name: 実行
         run: python main.py
