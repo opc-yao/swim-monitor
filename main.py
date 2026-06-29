@@ -13,10 +13,10 @@ TARGET = "JA6502"
 SMTP_SERVER = "smtp.office365.com"
 SMTP_PORT = 587
 
-EMAIL = yuuta-tazaki@aerotoyota.co.jp "あなたのOutlookメール"
-PASSWORD = "アプリパスワード"  # ←ここに貼る
+EMAIL = yutazaki0506@outlook.jp "あなたのOutlookメール"
+PASSWORD = rcnljhvguyuzvrtg "アプリパスワード"  # ←ここに貼る
 
-TO_EMAIL = yutazaki0506@gmail.com "あなたの通知先メール"
+TO_EMAIL = yao-opc@aerotoyota.co.jp "あなたの通知先メール"
 
 
 def send_mail(message):
