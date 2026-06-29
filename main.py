@@ -36,23 +36,13 @@ def run():
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
-page.goto(SWIM_URL)
-
-# しっかり待つ
-page.wait_for_timeout(10000)
-
-# iframeを取得（重要）
-frame = page.frame_locator("iframe")
-
-# 入力（iframe内で操作）
-frame.locator("input").first.fill(LOGIN_ID)
-frame.locator("input[type='password']").fill(LOGIN_PW)
-
-# ログインボタン
-frame.locator("button").click()
-
-# ログイン後待機
-page.wait_for_timeout(10000)
+        page.goto(SWIM_URL)
+        page.wait_for_timeout(10000)
+        frame = page.frame_locator("iframe")
+        frame.locator("input").first.fill(LOGIN_ID)
+        frame.locator("input[type='password']").fill(LOGIN_PW)
+        frame.locator("button").click()
+        page.wait_for_timeout(10000)
 
         page.click("text=利用サービス一覧")
         page.click("text=フライトプラン登録サービス")
