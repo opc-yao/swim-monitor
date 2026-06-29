@@ -57,10 +57,7 @@ def run():
 
         import os
 
-        if TARGET in content:
-            if not os.path.exists("sent.txt"):
-                send_mail(f"✈️ {TARGET} が検知されました")
-                open("sent.txt", "w").write("sent")
+        send_mail("✅ テストメール成功")
 
         browser.close()
 
