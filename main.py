@@ -44,6 +44,16 @@ def run():
             "フライトプラン登録サービス存在:",
             "フライトプラン登録サービス" in content
         )
+        page.get_by_text(
+            "フライトプラン登録サービス"
+        ).first.click()
+        page.wait_for_timeout(10000)
+        print("FPL移動後URL:", page.url)
+        page.screenshot(
+            path="fpl_service.png",
+            full_page=True
+        )
+        print("FPL画面保存完了")
 
         # 検証用スクリーンショット
         page.screenshot(
