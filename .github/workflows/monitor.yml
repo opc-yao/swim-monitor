@@ -38,3 +38,9 @@ jobs:
         with:
            name: service-list-html
            path: service_list.html
+           
+      - name: Upload FPL HTML
+        uses: actions/upload-artifact@v4
+        with:
+           name: fpl-html
+           path: fpl_page.html
