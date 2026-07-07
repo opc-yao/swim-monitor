@@ -60,6 +60,12 @@ def run():
             path="swim.png",
             full_page=True
         )
+        content = page.content()
+        print("フライトプラン:", "フライトプラン" in content)
+        print("利用サービス:", "利用サービス" in content)
+        print("通報一覧:", "通報一覧" in content)
+        with open("swim_page.html", "w", encoding="utf-8") as f:
+            f.write(page.content())
 
         print("スクリーンショット保存完了")
 
