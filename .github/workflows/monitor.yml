@@ -1,19 +1,49 @@
-- run: python main.py
+name: SWIM Monitor
 
-      - name: Upload
+on:
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install playwright
+          playwright install chromium
+
+      - name: Run python
+        run: python main.py
+
+      - name: Upload SWIM Image
         uses: actions/upload-artifact@v4
         with:
-          name: upload
+          name: swim-image
           path: swim.png
 
-      - name: Upload FPL
+      - name: Upload FPL HTML
         uses: actions/upload-artifact@v4
         with:
-          name: upload-fpl
+          name: fpl-html
           path: fpl_page.html
 
-      - name: Upload Notification
+      - name: Upload Notification HTML
         uses: actions/upload-artifact@v4
         with:
           name: notification-html
           path: notification_page.html
+
+      - name: Upload Notification Image
+        uses: actions/upload-artifact@v4
+        with:
+          name: notification-image
+          path: notification_page.png
