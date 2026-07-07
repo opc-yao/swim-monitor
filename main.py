@@ -72,8 +72,34 @@ def run():
             path="fpl_page.png",
             full_page=True
         )
-
-        print("スクリーンショット保存完了")
+        
+        cards = page.locator("swim-card2")
+        
+        print("カード数:", cards.count())
+        
+        cards.nth(1).click()
+        
+        page.wait_for_timeout(15000)
+        
+        print("クリック後URL:", page.url)
+        
+        content = page.content()
+        
+        print("JA6502:", "JA6502" in content)
+        
+        with open(
+            "notification_list.html",
+            "w",
+            encoding="utf-8"
+        ) as f:
+            f.write(content)
+            
+            page.screenshot(    
+                path="notification_list.png",
+                full_page=True
+            )
+            print("通報一覧保存完了")
+            print("スクリーンショット保存完了")
 
         browser.close()
 
