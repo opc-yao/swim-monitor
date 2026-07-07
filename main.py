@@ -55,8 +55,8 @@ def run():
 
         content = page.content()
         print("現在URL:", page.url)
-        print("TARGET存在チェック:", TARGET in content)
-        print(content[:1000])
+        print(content[:5000])
+        send_mail("✅ テストメール成功")
 
         send_mail(f"✈️ {TARGET} が検知されました")
 
