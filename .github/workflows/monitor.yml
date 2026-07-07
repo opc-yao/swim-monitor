@@ -36,5 +36,5 @@ jobs:
       - name: Upload HTML
         uses: actions/upload-artifact@v4
         with:
-          name: swim-html
-          path: swim_page.html
+           name: service-list-html
+           path: service_list.html
