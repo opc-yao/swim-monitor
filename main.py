@@ -54,11 +54,11 @@ def run():
 
 
         content = page.content()
+        print("現在URL:", page.url)
+        print("TARGET存在チェック:", TARGET in content)
+        print(content[:1000])
 
-        if TARGET in content:
-            send_mail(f"✈️ {TARGET} が検知されました")
-            print("現在URL:", page.url)
-            print("TARGET存在チェック:", TARGET in content)
+        send_mail(f"✈️ {TARGET} が検知されました")
 
         browser.close()
 
