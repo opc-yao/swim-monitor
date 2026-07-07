@@ -19,9 +19,10 @@ PASSWORD =  "cghq khwj rnbj bhms"  # ←ここに貼る
 TO_EMAIL =  "yao-opc@aerotoyota.co.jp"
 
 
+
 def send_mail(message):
     msg = MIMEText(message)
-    msg["Subject"] = "SWIM検知通知"
+    msg["Subject"] = "SWIM確認"
     msg["From"] = EMAIL
     msg["To"] = TO_EMAIL
 
@@ -34,34 +35,44 @@ def send_mail(message):
 def run():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
+
         page = browser.new_page()
 
-        
         page.goto(SWIM_URL)
-# ✅ 十分待つ
-        page.wait_for_timeout(15000)
-# ✅ 全入力欄を取得
-        inputs = page.locator("input")
-# ✅ 数確認（デバッグ）
-        print("input数:", inputs.count())
-# ✅ 上から順に試す（強引だけど確実）
-        inputs.nth(0).fill(LOGIN_ID)
-        inputs.nth(1).fill(LOGIN_PW)
-# ✅ ボタン押す
-        page.locator("button").first.click()
-# ✅ 遷移待ち
+
         page.wait_for_timeout(10000)
 
+        inputs = page.locator("input")
 
-        content = page.content()
+        print("input数:", inputs.count())
+
+        inputs.nth(0).fill(LOGIN_ID)
+        inputs.nth(1).fill(LOGIN_PW)
+
+        page.locator("button").first.click()
+
+        page.wait_for_timeout(15000)
+
         print("現在URL:", page.url)
-        print(content[:5000])
-        send_mail("✅ テストメール成功")
 
-        send_mail(f"✈️ {TARGET} が検知されました")
+        # スクリーンショット保存
+        page.screenshot(
+            path="swim.png",
+            full_page=True
+        )
+
+        print("スクリーンショット保存完了")
+
+        send_mail("✅ SWIMログイン確認成功")
 
         browser.close()
 
 
 if __name__ == "__main__":
     run()
+
+        name: Upload Screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: swim-screenshot
+          path: swim.png
