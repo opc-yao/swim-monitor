@@ -55,9 +55,10 @@ def run():
 
         content = page.content()
 
-        import os
-
-        send_mail("✅ テストメール成功")
+        if TARGET in content:
+            send_mail(f"✈️ {TARGET} が検知されました")
+            print("現在URL:", page.url)
+            print("TARGET存在チェック:", TARGET in content)
 
         browser.close()
 
