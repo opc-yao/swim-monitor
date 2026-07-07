@@ -42,7 +42,24 @@ def run():
         content = page.content()
 
         print("通報一覧:", "通報一覧" in content)
-
+        
+        page.wait_for_timeout(15000)
+        print("通報一覧URL:", page.url)
+        content = page.content()
+        print("JA6502:", "JA6502" in content)
+        page.screenshot(
+            path="notification_list.png",
+            full_page=True
+        )
+        with open(
+            "notification_list.html",
+            "w",
+            encoding="utf-8"
+        ) as f:
+            f.write(content)
+            
+            print("通報一覧保存完了")
+        
         page.screenshot(
             path="fpl_page.png",
             full_page=True
