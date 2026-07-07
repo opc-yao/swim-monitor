@@ -70,9 +70,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-
-        name: Upload Screenshot
-        uses: actions/upload-artifact@v4
-        with:
-          name: swim-screenshot
-          path: swim.png
