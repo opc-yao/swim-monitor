@@ -1,46 +1,19 @@
-name: SWIM Monitor
+- run: python main.py
 
-on:
-  schedule:
-    - cron: "*/5 * * * *"
-  workflow_dispatch:
-
-jobs:
-  run:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: コード取得
-        uses: actions/checkout@v4
-
-      - name: Pythonセット
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: ライブラリインストール
-        run: pip install playwright
-
-      - name: ブラウザインストール
-        run: playwright install
-
-      - name: 実行
-        run: python main.py
-        
-      - name: Upload Screenshot
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: swim-screenshot
+          name: upload
           path: swim.png
 
-      - name: Upload HTML
+      - name: Upload FPL
         uses: actions/upload-artifact@v4
         with:
-           name: service-list-html
-           path: service_list.html
-           
-      - name: Upload FPL HTML
+          name: upload-fpl
+          path: fpl_page.html
+
+      - name: Upload Notification
         uses: actions/upload-artifact@v4
         with:
-           name: fpl-html
-           path: fpl_page.html
+          name: notification-html
+          path: notification_page.html
