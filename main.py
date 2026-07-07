@@ -44,6 +44,11 @@ def run():
             "フライトプラン登録サービス存在:",
             "フライトプラン登録サービス" in content
         )
+        
+        with open("service_list.html", "w", encoding="utf-8") as f:
+            f.write(page.content())
+        print("service_list.html 保存完了")
+
         page.get_by_text(
             "フライトプラン登録サービス"
         ).first.click()
