@@ -30,60 +30,52 @@ def run():
 
         print("現在URL:", page.url)
 
-        # フライトプラン登録サービスへ
+        # フライトプラン登録サービス
         page.goto(
             "https://web.swim.mlit.go.jp/f1fprg/browse/fia627s010"
         )
 
-        page.wait_for_timeout(15000)
+        page.wait_for_timeout(10000)
 
-        print("FPL URL:", page.url)
+        cards = page.locator("swim-card2")
 
-        content = page.content()
+        print("カード数:", cards.count())
 
-        print("通報一覧:", "通報一覧" in content)
+        cards.nth(1).click()
 
-        # 現在の画面保存
+        page.wait_for_timeout(10000)
+
+        print("ページ数:", len(page.context.pages))
+
+        notification_page = page.context.pages[1]
+
+        notification_page.wait_for_timeout(10000)
+
+        print(
+            "通報一覧URL:",
+            notification_page.url
+        )
+
+        content = notification_page.content()
+
+        print(
+            "JA6502:",
+            "JA6502" in content
+        )
+
         with open(
-            "fpl_page.html",
+            "notification_page.html",
             "w",
             encoding="utf-8"
         ) as f:
             f.write(content)
 
-        print("FPLページ保存完了")
-
-        # メニューカード確認
-        cards = page.locator("swim-card2")
-
-        print("カード数:", cards.count())
-
-        print("クリック前ページ数:",
-              len(page.context.pages))
-
-        # 通報一覧カード
-        cards.nth(1).click()
-
-        page.wait_for_timeout(10000)
-
-        print("クリック後ページ数:",
-              len(page.context.pages))
-
-        # 開いているページ一覧
-        for i, p2 in enumerate(page.context.pages):
-            try:
-                print(
-                    f"ページ{i}: {p2.url}"
-                )
-            except:
-                pass
-
-        page.screenshot(
-            path="after_click.png",
+        notification_page.screenshot(
+            path="notification_page.png",
             full_page=True
         )
 
-        print("スクリーンショット保存完了")
+        print("通報一覧保存完了")
 
         browser.close()
 
