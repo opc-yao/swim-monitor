@@ -40,56 +40,10 @@ def run():
         print("FPL URL:", page.url)
 
         content = page.content()
-        
+
         print("通報一覧:", "通報一覧" in content)
-        
-        page.get_by_text("通報一覧").click()
-        
-        page.wait_for_timeout(15000)
-        
-        print("通報一覧URL:", page.url)
-        
-        links = page.locator("a")
-        
-        print("リンク数:", links.count())
-        
-        for i in range(min(20, links.count())):
-            try:
-                print(i, links.nth(i).text_content())
-                except:
-                    pass
-                    content = page.content()
-                    print("JA6502:", "JA6502" in content)
 
-    page.screenshot(
-            path="notification_list.png",
-            full_page=True
-        )
-        with open(
-            "notification_list.html",
-            "w",
-            encoding="utf-8"
-        ) as f:
-            f.write(content)
-            
-            print("通報一覧保存完了")
-        
-        page.screenshot(
-            path="fpl_page.png",
-            full_page=True
-        )
-
+        # FPL画面保存
         with open(
             "fpl_page.html",
             "w",
-            encoding="utf-8"
-        ) as f:
-            f.write(content)
-
-        print("FPLページ保存完了")
-
-        browser.close()
-
-
-if __name__ == "__main__":
-    run()
