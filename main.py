@@ -16,7 +16,7 @@ SMTP_PORT = 587
 EMAIL =  "yao.opc@gmail.com"
 PASSWORD =  "cghq khwj rnbj bhms"  # ←ここに貼る
 
-TO_EMAIL =  "yao-opc@aerotoyota.co.jp"
+TO_EMAIL =  "yuuta-tazaki@aerotoyota.co.jp"
 
 
 
@@ -56,6 +56,13 @@ def run():
         page.click("text=利用サービス一覧")
         page.wait_for_timeout(10000)
         print("移動後URL:", page.url)
+        page.click("text=フライトプラン登録サービス")
+        page.wait_for_timeout(10000)
+        print("FPL移動後URL:", page.url)
+        content = page.content()
+        print("通報一覧:", "通報一覧" in content)
+        print("JA6502:", "JA6502" in content)
+
         page.screenshot(
             path="service_list.png",
             full_page=True
