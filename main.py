@@ -56,12 +56,20 @@ def run():
         page.click("text=利用サービス一覧")
         page.wait_for_timeout(10000)
         print("移動後URL:", page.url)
-        page.click("text=フライトプラン登録サービス")
+        
+        page.click("text=フライトプラン登録サービス").click()
         page.wait_for_timeout(10000)
         print("FPL移動後URL:", page.url)
+        page.screenshot(
+            path="fpl_click.png",
+            full_page=True
+        )
+
         content = page.content()
-        print("通報一覧:", "通報一覧" in content)
-        print("JA6502:", "JA6502" in content)
+        print(
+            "フライトプラン登録サービス:",
+            "フライトプラン登録サービス" in content
+        )
 
         page.screenshot(
             path="service_list.png",
