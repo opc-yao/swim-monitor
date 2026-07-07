@@ -10,11 +10,11 @@ LOGIN_PW = "@1234Dispatch"
 TARGET = "JA6502"
 
 # ===== メール設定 =====
-SMTP_SERVER = "smtp.office365.com"
+SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
-EMAIL =  "yutazaki0506@outlook.jp"
-PASSWORD =  "rcnljhvguyuzvrtg"  # ←ここに貼る
+EMAIL =  "yao.opc@gmail.com"
+PASSWORD =  "cghq khwj rnbj bhms"  # ←ここに貼る
 
 TO_EMAIL =  "yao-opc@aerotoyota.co.jp"
 
