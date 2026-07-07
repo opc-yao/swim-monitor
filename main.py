@@ -7,6 +7,17 @@ SWIM_URL = "https://top.swim.mlit.go.jp/swim/login"
 LOGIN_ID = "aak-opr@aerotoyota.co.jp"
 LOGIN_PW = "@1234Dispatch"
 
+page.click("text=利用サービス一覧")
+
+page.wait_for_timeout(10000)
+
+print("移動後URL:", page.url)
+
+page.screenshot(
+    path="service_list.png",
+    full_page=True
+)
+
 TARGET = "JA6502"
 
 # ===== メール設定 =====
