@@ -40,14 +40,28 @@ def run():
         print("FPL URL:", page.url)
 
         content = page.content()
-
+        
         print("通報一覧:", "通報一覧" in content)
         
+        page.get_by_text("通報一覧").click()
+        
         page.wait_for_timeout(15000)
+        
         print("通報一覧URL:", page.url)
-        content = page.content()
-        print("JA6502:", "JA6502" in content)
-        page.screenshot(
+        
+        links = page.locator("a")
+        
+        print("リンク数:", links.count())
+        
+        for i in range(min(20, links.count())):
+            try:
+                print(i, links.nth(i).text_content())
+                except:
+                    pass
+                    content = page.content()
+                    print("JA6502:", "JA6502" in content)
+
+    page.screenshot(
             path="notification_list.png",
             full_page=True
         )
