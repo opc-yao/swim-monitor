@@ -5,9 +5,11 @@ on:
 
 jobs:
   monitor:
+
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -21,20 +23,11 @@ jobs:
           pip install playwright
           playwright install chromium
 
-      - name: Run python
+      - name: Run Python
         run: python main.py
-
-      - name: Upload SWIM Image
-        uses: actions/upload-artifact@v4
-        with:
-          name: swim-image
-          path: swim.png
-
-      - name: Upload FPL HTML
-        uses: actions/upload-artifact@v4
-        with:
-          name: fpl-html
-          path: fpl_page.html
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
 
       - name: Upload Notification HTML
         uses: actions/upload-artifact@v4
@@ -42,7 +35,7 @@ jobs:
           name: notification-html
           path: notification_page.html
 
-      - name: Upload Notification Image
+      - name: Upload Notification PNG
         uses: actions/upload-artifact@v4
         with:
           name: notification-image
