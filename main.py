@@ -30,46 +30,36 @@ def run():
 
         print("現在URL:", page.url)
 
-        # 利用サービス一覧へ
-        page.click("text=利用サービス一覧")
+        # フライトプラン登録サービスへ直接移動
+        page.goto(
+            "https://web.swim.mlit.go.jp/f1fprg/browse/fia627s010"
+        )
 
-        page.wait_for_timeout(10000)
+        page.wait_for_timeout(15000)
 
-        print("移動後URL:", page.url)
+        print("FPL URL:", page.url)
 
-        # フライトプラン登録サービスが存在するか確認
         content = page.content()
 
-        print(
-            "フライトプラン登録サービス存在:",
-            "フライトプラン登録サービス" in content
-        )
-        
-        with open("service_list.html", "w", encoding="utf-8") as f:
-            f.write(page.content())
-        print("service_list.html 保存完了")
+        print("通報一覧:", "通報一覧" in content)
 
-        page.get_by_text(
-            "フライトプラン登録サービス"
-        ).first.click()
-        page.wait_for_timeout(10000)
-        print("FPL移動後URL:", page.url)
         page.screenshot(
-            path="fpl_service.png",
-            full_page=True
-        )
-        print("FPL画面保存完了")
-
-        # 検証用スクリーンショット
-        page.screenshot(
-            path="service_list.png",
+            path="fpl_page.png",
             full_page=True
         )
 
-        print("スクリーンショット保存完了")
+        with open(
+            "fpl_page.html",
+            "w",
+            encoding="utf-8"
+        ) as f:
+            f.write(content)
+
+        print("FPLページ保存完了")
 
         browser.close()
 
 
 if __name__ == "__main__":
     run()
+``
