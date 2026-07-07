@@ -30,10 +30,8 @@ def run():
 
         print("現在URL:", page.url)
 
-        # フライトプラン登録サービスへ直接移動
-        page.goto(
-            "https://web.swim.mlit.go.jp/f1fprg/browse/fia627s010"
-        )
+        # フライトプラン登録サービスへ
+        page.goto("https://web.swim.mlit.go.jp/f1fprg/browse/fia627s010")
 
         page.wait_for_timeout(15000)
 
@@ -43,7 +41,42 @@ def run():
 
         print("通報一覧:", "通報一覧" in content)
 
-        # FPL画面保存
-        with open(
-            "fpl_page.html",
-            "w",
+        # HTML保存
+        with open("fpl_page.html", "w", encoding="utf-8") as f:
+            f.write(content)
+
+        print("FPLページ保存完了")
+
+        # aタグ一覧確認
+        links = page.locator("a")
+
+        count = links.count()
+
+        print("リンク数:", count)
+
+        for i in range(min(count, 30)):
+            try:
+                text = links.nth(i).text_content()
+                href = links.nth(i).get_attribute("href")
+
+                print(
+                    f"{i}: text={text} href={href}"
+                )
+
+            except Exception as e:
+                print(
+                    f"{i}: ERROR={e}"
+                )
+
+        page.screenshot(
+            path="fpl_page.png",
+            full_page=True
+        )
+
+        print("スクリーンショット保存完了")
+
+        browser.close()
+
+
+if __name__ == "__main__":
+    run()
