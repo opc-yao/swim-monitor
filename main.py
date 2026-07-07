@@ -7,17 +7,6 @@ SWIM_URL = "https://top.swim.mlit.go.jp/swim/login"
 LOGIN_ID = "aak-opr@aerotoyota.co.jp"
 LOGIN_PW = "@1234Dispatch"
 
-page.click("text=利用サービス一覧")
-
-page.wait_for_timeout(10000)
-
-print("移動後URL:", page.url)
-
-page.screenshot(
-    path="service_list.png",
-    full_page=True
-)
-
 TARGET = "JA6502"
 
 # ===== メール設定 =====
@@ -59,18 +48,19 @@ def run():
 
         inputs.nth(0).fill(LOGIN_ID)
         inputs.nth(1).fill(LOGIN_PW)
-
+        
         page.locator("button").first.click()
-
         page.wait_for_timeout(15000)
-
         print("現在URL:", page.url)
-
-        # スクリーンショット保存
+        # 利用サービス一覧へ移動
+        page.click("text=利用サービス一覧")
+        page.wait_for_timeout(10000)
+        print("移動後URL:", page.url)
         page.screenshot(
-            path="swim.png",
+            path="service_list.png",
             full_page=True
         )
+
         content = page.content()
         print("フライトプラン:", "フライトプラン" in content)
         print("利用サービス:", "利用サービス" in content)
